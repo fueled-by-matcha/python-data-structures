@@ -35,7 +35,7 @@ class DoublyLinkedList:
     self.head_node = new_head
     if self.tail_node is None:
       self.tail_node = new_head
-
+# adds new tail by first checking for head node and then setting tail node
   def add_to_tail(self, new_value):
     new_tail = Node(new_value)
     current_tail = self.tail_node
@@ -45,3 +45,37 @@ class DoublyLinkedList:
     self.tail_node = new_tail
     if self.head_node is None:
       self.head_node = new_tail
+
+  # removes head node and sets new node
+  def remove_head(self):
+    # set removed head to head node
+    removed_head = self.head_node
+    #check for null head
+    if removed_head == None:
+      return None
+    # set head to next node
+    self.head_node = removed_head.get_next_node()
+    #check that head node is still not null and set previous node to none
+    if self.head_node is not None:
+      self.head_node.set_prev_node(None)
+    # remove tail if it was the head
+    if removed_head == self.tail_node:
+      self.remove_tail()
+    # return value of removed head
+    return removed_head.get_value()
+
+  def remove_tail(self):
+  # set removed tail
+   removed_tail = self.tail_node 
+  # check for null head
+   if removed_tail == None:
+    return None
+  # set new tail and remove next node
+   self.tail_node = removed_tail.get_prev_node()
+   if self.tail_node != None:
+     self.tail_node.set_next_node(None)
+   # remove head if it is the same as tail
+   if removed_tail == self.head_node:
+      self.remove_head()
+  # return value of removed tail
+   return removed_tail.get_value()
