@@ -79,3 +79,33 @@ class DoublyLinkedList:
       self.remove_head()
   # return value of removed tail
    return removed_tail.get_value()
+
+  def remove_by_value(self, value_to_remove):
+    #create node_to_remove variable
+    node_to_remove = None
+    # start checking at head node
+    current_node = self.head_node
+    while current_node != None:
+      #break out of loop if value is found
+      if current_node.get_value() == value_to_remove:
+        node_to_remove = current_node
+        break
+      #move to next node
+      current_node = current_node.get_next_node()
+    #return none if value not found
+    if node_to_remove == None:
+      return None
+    # check if node to remove is head
+    if node_to_remove.get_value() == self.head_node.get_value():
+      self.remove_head()
+    # check if node to remove is tail
+    elif node_to_remove.get_value() == self.tail_node.get_value():
+      self.remove_tail()
+    # must be a middle node, set new links
+    else:
+      next_node = node_to_remove.get_next_node()
+      prev_node = node_to_remove.get_prev_node()
+      next_node.set_prev_node(prev_node)
+      prev_node.set_next_node(next_node)
+    # return removed node
+    return node_to_remove
