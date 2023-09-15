@@ -34,3 +34,37 @@ class LinkedList:
           					current_node = None
        				 else:
           					current_node = next_node
+					 
+	def swap_nodes(self, val1, val2):
+		node1 = self.head_node
+		node2 = self.head_node
+		node1_prev = None
+		node2_prev = None
+		if val1 == val2:
+			print("Values are the same")
+			return None
+		while node1 != None:
+			if node1.get_value() == val1:
+				break
+			node1_prev = node1
+			node1 = node1.get_next_node()
+		while node2 != None:
+			if node2.get_value() == val2:
+				break
+			node2_prev = node2
+			node2 = node2.get_next_node()
+		if (node1 is None or node2 is None):
+			print("Swap is not possible - values do not exist")
+			return None
+		if node1_prev == None:
+			self.head_node = node2
+		else:
+			node1_prev.set_next_node(node2)
+		if node2_prev == None:
+			self.head_node = node1
+		else:
+			node2_prev.set_next_node(node1)
+		temp = node1.get_next_node()
+		node1.set_next_node(node2.get_next_node())
+		node2.set_next_node(temp)
+		
